@@ -3,17 +3,28 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AntDesign ,Ionicons ,MaterialIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation,useTheme} from '@react-navigation/native'
+import {useDispatch,useSelector} from 'react-redux'
 
 export default function Header() {
 
-    const myColor = "#212121"
+   
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    const {colors} = useTheme()
+    const myColor = colors.iconColor
+
+    const currentTheme = useSelector(state => {
+        return state.myDarkMode
+    }) 
+   
+
   return (
     <View style={{
         marginTop:Constant.statusBarHeight,
         height:45,
-        backgroundColor:"white",
+        backgroundColor:colors.headerColor,
         flexDirection:"row",
         justifyContent:"space-between",
         elevation:4
@@ -29,12 +40,16 @@ export default function Header() {
             marginLeft:5,
             fontWeight:"bold",
             color:myColor
-            }}>YouTube</Text>
+            }}>LocalTube</Text>
         </View>
      <View style={{flexDirection:"row",justifyContent:"space-between",width:120,margin:5}}>
          <Ionicons name="md-videocam" size={32} color={myColor} />
          <Ionicons name="md-search" size={32} color={myColor} onPress={()=>{navigation.navigate("search")}}/>
-         <MaterialIcons name="account-circle" size={32} color={myColor} />
+         <MaterialIcons name="account-circle" size={32} color={myColor} 
+         
+         onPress={()=>dispatch({type:"change_theme",payload:!currentTheme})}
+
+         />
      </View>
     </View>
   );

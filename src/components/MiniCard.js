@@ -1,10 +1,11 @@
 import React from 'react';
-import {  Text, View, Dimensions, Image,TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
+import {  Text, View, Dimensions, Image,TouchableOpacity,} from 'react-native';
+import {useNavigation,useTheme} from '@react-navigation/native'
 
 const MiniCard = (props) => {
     const navig =useNavigation()
-
+    const { colors} = useTheme()
+    const textColor = colors.iconColor
     return (
         <TouchableOpacity onPress={()=>navig.navigate("videoplayer",{videoId:props.videoId,title:props.title})}>
         <View style={{
@@ -21,12 +22,12 @@ const MiniCard = (props) => {
             />
 
             <View style={{paddingLeft:7}}>
-                <Text style={{ fontSize: 17, width: Dimensions.get("screen").width / 2 }}
+                <Text style={{ fontSize: 17, width: Dimensions.get("screen").width / 2,color:textColor}}
                     ellipsizeMode="tail"
                     numberOfLines={3}>
                      {props.title}
                 </Text>
-                <Text style={{fontSize:12,}}>{props.channel}</Text>
+                <Text style={{fontSize:12,color:textColor}}>{props.channel}</Text>
             </View>
 
         </View>

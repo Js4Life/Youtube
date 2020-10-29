@@ -9,7 +9,7 @@ import { FlatList } from 'react-native-gesture-handler';
 export default function HomeScreen() {
 
     const cardData = useSelector(state=>{
-        return state
+        return state.cardData
     })
 
     return (

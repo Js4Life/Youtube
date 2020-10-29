@@ -25,8 +25,8 @@ const LittleCard = ({name}) => {
 const Explore = () => {
 
     const cardData = useSelector(state => {
-        console.log('state',state)
-        return state
+      //  console.log('state',state)
+        return state.cardData
     })
 
     return (

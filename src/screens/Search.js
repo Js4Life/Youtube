@@ -1,25 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput ,FlatList, ActivityIndicator } from 'react-native';
+import { View, ScrollView, TextInput ,FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import MiniCard from '../components/MiniCard'
 import Constant from 'expo-constants'
-
+import {useTheme} from '@react-navigation/native'
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=AIzaSyDQ0aNc-BdLxJcSmvwkKJCWstvZmg-gP08
 
 import {useSelector ,useDispatch} from 'react-redux'
+
+
 
 const SearchScreen = ({navigation}) => {
 
     const [value, setValue] = useState("")
    // const [miniCardData,setMiniCard]= useState([])
-    const [loading,setLoading]= useState(false)
 
+   const {colors} = useTheme()
+   const myColor = colors.iconColor
+
+  
+    const dispatch = useDispatch()
     const miniCardData = useSelector(state=> {
-        return state
+        return state.cardData
     })
 
-    const dispatch = useDispatch()
+    const [loading,setLoading]= useState(false)
 
     const fetchData = () => {
         setLoading(true)
@@ -43,9 +49,12 @@ const SearchScreen = ({navigation}) => {
                 flexDirection: "row",
                 justifyContent: "space-around",
                 elevation: 5,
-                backgroundColor: "white"
+                backgroundColor:colors.headerColor
             }}>
-                <Ionicons name="md-arrow-back" onPress={()=>navigation.goBack()} size={32} />
+                <Ionicons
+                
+                style={{color:myColor}}
+                name="md-arrow-back" onPress={()=>navigation.goBack()} size={32} />
                 <TextInput
                 
                     value={value}
@@ -53,7 +62,9 @@ const SearchScreen = ({navigation}) => {
                     style={{ width: "70%", backgroundColor: "#e6e6e6" }}
                 />
 
-                <Ionicons name="md-send" size={32}  onPress={()=>{fetchData()}}/>
+                <Ionicons  style={{color:myColor}} 
+                name="md-send" size={32}  
+                onPress={()=>{fetchData()}}/>
 
             </View>
 
