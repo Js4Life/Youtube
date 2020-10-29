@@ -4,23 +4,32 @@ import { StyleSheet, Text, View, ScrollView, TextInput ,FlatList, ActivityIndica
 import { Ionicons } from '@expo/vector-icons'
 import MiniCard from '../components/MiniCard'
 import Constant from 'expo-constants'
-import { NavigationContainer } from '@react-navigation/native';
+
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=AIzaSyDQ0aNc-BdLxJcSmvwkKJCWstvZmg-gP08
+
+import {useSelector ,useDispatch} from 'react-redux'
 
 const SearchScreen = ({navigation}) => {
 
     const [value, setValue] = useState("")
-    const [miniCardData,setMiniCard]= useState("")
+   // const [miniCardData,setMiniCard]= useState([])
     const [loading,setLoading]= useState(false)
+
+    const miniCardData = useSelector(state=> {
+        return state
+    })
+
+    const dispatch = useDispatch()
 
     const fetchData = () => {
         setLoading(true)
         fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyDQ0aNc-BdLxJcSmvwkKJCWstvZmg-gP08`)
            .then(res=>res.json())
            .then(data=>{
-               console.log(data)
+              // console.log(data)
                setLoading(false)
-               setMiniCard(data.items)
+               dispatch({type:"add",payload:data.items})
+             //  setMiniCard(data.items)
            }) 
 
 

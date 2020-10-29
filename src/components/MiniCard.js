@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import {  Text, View, Dimensions, Image,TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native'
 
 const MiniCard = (props) => {
+    const navig =useNavigation()
+
     return (
+        <TouchableOpacity onPress={()=>navig.navigate("videoplayer",{videoId:props.videoId,title:props.title})}>
         <View style={{
             flexDirection:"row",
             margin:10,marginBottom:0
@@ -26,6 +30,7 @@ const MiniCard = (props) => {
             </View>
 
         </View>
+        </TouchableOpacity>
     )
 }
 
