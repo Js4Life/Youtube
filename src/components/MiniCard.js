@@ -3,7 +3,9 @@ import {  Text, View, Dimensions, Image,TouchableOpacity,} from 'react-native';
 import {useNavigation,useTheme} from '@react-navigation/native'
 
 const MiniCard = (props) => {
+
     const navig =useNavigation()
+    
     const { colors} = useTheme()
     const textColor = colors.iconColor
     return (

@@ -16,6 +16,8 @@ const VideoPlayer = ({ route }) => {
                 <WebView
                     javaScriptEnabled={true}
                     domStorageEnabled={true}
+                    allowsFullscreenVideo={true}
+                        
                     source={{ uri: `https://www.youtube.com/embed/${videoId}` }}>
                 </WebView>
                 <Text style={{ fontSize: 20, width: Dimensions.get("screen").width - 50, margin: 9 }}
